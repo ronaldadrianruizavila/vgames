@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use Caffeinated\Shinobi\Models\Role;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -34,18 +35,7 @@ class UserController extends Controller
 	 */
 	public function store(Request $request)
 	{
-		$this->validate($request, [
-				'nombre' => 'required',
-		]);
 
-		$nombre = $request->input('nombre');
-		$sesion_id = $request->input('sesion_id');
-
-		DB::executeProcedure('PK_SALAS.INSERTSALA', ['nombre' => $nombre, 'sesion_id' => $sesion_id]);
-		DB::commit();
-
-
-		return redirect()->route('sala.index')->with('message', 'Sala insertada');
 	}
 
 	/**
@@ -65,13 +55,10 @@ class UserController extends Controller
 	 * @param  \App\Sala $sala
 	 * @return \Illuminate\Http\Response
 	 */
-	public function edit(Request $request,Sala $sala)
+	public function edit(User $usuario)
 	{
-		$sesiones = Sesion::where('sala_id','=',$sala->id)->select('id','nombre')->get('id');
-		if ($request->ajax()){
-			return response()->json($sesiones);
-		}
-		return view("$this->path.edit", compact(['sala']));
+		$roles = Role::get();
+		return view("$this->path.edit", compact(['usuario','roles']));
 	}
 
 	/**
@@ -82,19 +69,16 @@ class UserController extends Controller
 	 * @return \Illuminate\Http\Response
 	 * @throws \Illuminate\Validation\ValidationException
 	 */
-	public function update(Request $request, Sala $sala)
+	public function update(Request $request, User $usuario)
 	{
-		$this->validate($request, [
-				'nombre' => 'required'
-		]);
+		//usuarios
+		$usuario->update($request->all());
 
-		$nombre = $request->input('nombre');
-		$estado = $request->input('estado');
+		//roles
+		$usuario->roles()->sync($request->get('rol'));
 
-		DB::executeProcedure('PK_SALAS.UPDATESALA', ['ide' => $sala->id, $estado, 'nombre' => $nombre]);
-		DB::commit();
 
-		return redirect()->route('sala.index')->with('message', 'Sala actualizada');
+		return redirect()->route('usuario.index')->with('message', 'usuario actualizada');
 	}
 
 	/**

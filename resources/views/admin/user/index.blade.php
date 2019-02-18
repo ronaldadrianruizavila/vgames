@@ -25,9 +25,9 @@
 						<th scope="col">Nombre</th>
 						<th scope="col">Estado</th>
 						<th scope="col">Fecha de creacion</th>
-						@can('user.edit')
+						{{--@can('user.edit')--}}
 							<th scope="col">Acciones</th>
-						@endcan
+						{{--@endcan--}}
 					</tr>
 					</thead>
 					<tbody class="text-center">
@@ -37,9 +37,9 @@
 							<td>{{$user['estado']}}</td>
 							<td>{{$user['created_at']}}</td>
 
-							@can('user.edit')
+							{{--@can('user.edit')--}}
 								<td>@include('partials.actions.user') </td>
-							@endcan
+							{{--@endcan--}}
 						</tr>
 					@endforeach
 					</tbody>

@@ -96,6 +96,9 @@ class ExposicionController extends Controller
      */
     public function destroy(Exposicion $exposicion)
     {
-        //
+	    DB::executeProcedure('PK_EXPOSICION.DELETEEXPOSICION', ['id' => $exposicion->id]);
+	    DB::commit();
+
+	    return redirect()->route('exposicion.index')->with('message', 'Exposicion eliminada');
     }
 }

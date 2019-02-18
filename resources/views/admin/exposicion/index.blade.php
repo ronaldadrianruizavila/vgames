@@ -22,6 +22,7 @@
 					<tr>
 						<th scope="col">Titulo</th>
 						<th scope="col">Estado</th>
+						<th scope="col">Duracion</th>
 						<th scope="col">Fecha de creacion</th>
 						<th scope="col">Acciones</th>
 					</tr>
@@ -33,7 +34,7 @@
 							<td>{{$exposicion['estado']}}</td>
 							<td>{{$exposicion['duracion']}}</td>
 							<td>{{$exposicion['created_at']}}</td>
-							{{--<td>@include('$partials.actions.exposicion') </td>--}}
+							<td>@include('partials.actions.exposicion') </td>
 						</tr>
 					@endforeach
 					</tbody>
