@@ -85,7 +85,16 @@ class ExposicionController extends Controller
      */
     public function update(Request $request, Exposicion $exposicion)
     {
-        //
+        //UPDATEEXPOSICION
+	    $titulo = $request->input('titulo');
+	    $duracion = $request->input('duracion');
+	    $estado = $request->input('estado');
+
+
+	    DB::executeProcedure('PK_EXPOSICION.UPDATEEXPOSICION', ['id' => $exposicion->id,'titulo'=>$titulo,'duracion'=>$duracion,'estado'=>$estado]);
+	    DB::commit();
+
+	    return redirect()->route('exposicion.index')->with('message', 'Exposicion actualizada');
     }
 
     /**
