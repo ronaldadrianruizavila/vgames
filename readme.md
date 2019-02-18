@@ -27,5 +27,8 @@ Ejecutar en consola luego de tener instalado laravel y php
 - **composer install.**
 - **npm install.**
 - **npm run dev.**
+- **cambiar el nombre del archivo .env-example a .env .**
+- **configurar el .env con las variables de entorno con el usuario y contraseña de plsql y puerto.**
+- **php artisan migrate.**
 
 Derechos de autor reservado.
