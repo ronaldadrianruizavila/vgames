@@ -20,4 +20,12 @@ Desarrollada para la materia de base datos.
 - **Composer.**
 - **Laravel.**
 
+## Pasos a seguir
+Ejecutar en consola luego de tener instalado laravel y php
+
+- **php artisan key:generate**
+- **composer install.**
+- **npm install.**
+- **npm run dev.**
+
 Derechos de autor reservado.
